@@ -10,15 +10,14 @@ logger.lifecycle("Compiling for Java ${compileJavaVersion} and later, testing ag
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
-    apply plugin: 'signing'
     apply plugin: 'com.github.johnrengelman.shadow'
 
     group = "com.github.therapi"
-    version = "0.16.0-SNAPSHOT"
+    version = "0.16.0_OPENAPI_JAVADOC-SNAPSHOT"
 
     repositories {
         mavenCentral()
-    }
+	}
 
     dependencies {
         testImplementation 'junit:junit:4.13.2'
@@ -104,14 +103,6 @@ subprojects {
         }
     }
 
-    signing {
-        // Use GPG agent
-        // https://docs.gradle.org/current/userguide/signing_plugin.html#sec:using_gpg_agent
-        // Requires "signing.gnupg.keyName" property defined externally in gradle.properties
-        useGpgCmd()
-
-        sign publishing.publications.mavenJava
-    }
 
     task install {
         dependsOn(publishToMavenLocal)

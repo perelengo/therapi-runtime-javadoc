@@ -97,13 +97,13 @@ public class ClassJavadoc extends BaseJavadoc {
     }
 
     ClassJavadoc createEnhancedClassJavadoc(Class<?> clazz) {
-        assert getName().replace("$", ".").equals(clazz.getCanonicalName())
+        assert getName().equals(clazz.getName())
                 : "Class `" + clazz.getName() + "` does not match class doc for `" + getName() + "`";
 
         Map<String, ClassJavadoc> classJavadocCache = new HashMap<>();
 
         classJavadocCache.put(clazz.getCanonicalName(), this);
-        getAllTypeAncestors(clazz).forEach(cls -> classJavadocCache.put(cls.getCanonicalName(), RuntimeJavadoc.getSkinnyClassJavadoc(cls)));
+        getAllTypeAncestors(clazz).forEach(cls -> classJavadocCache.put(cls.getName(), RuntimeJavadoc.getSkinnyClassJavadoc(cls)));
 
         Map<MethodSignature, MethodJavadoc> methodJavadocs = new LinkedHashMap<>();
         Arrays.stream(clazz.getMethods())

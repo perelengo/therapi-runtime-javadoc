@@ -112,7 +112,7 @@ public class RuntimeJavadoc {
 
     private static ClassJavadoc getSkinnyClassJavadoc(String qualifiedClassName, ClassLoader loader) {
         final String resourceName = getResourceName(qualifiedClassName);
-        try (InputStream is = loader.getResourceAsStream("/" + resourceName)) {
+        try (InputStream is = loader.getResourceAsStream(resourceName)) {
             return parseJavadocResource(qualifiedClassName, is);
         } catch (IOException e) {
             throw new RuntimeException(e);
